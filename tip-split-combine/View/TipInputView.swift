@@ -20,6 +20,7 @@ class TipInputView: UIView {
     
     private lazy var tenPerButton: UIButton = {
         let button = ButtonFactory.build(tip: .tenPercent)
+        button.accessibilityIdentifier = ScreenIdentifier.TipInputView.tenPercentButton.rawValue
         button.tapPublisher.flatMap {
             Just(Tip.tenPercent)
         }.assign(to: \.value, on: tipSubject)
@@ -29,6 +30,7 @@ class TipInputView: UIView {
     
     private lazy var fifteenPerButton: UIButton = {
         let button = ButtonFactory.build(tip: .fifteenPercent)
+        button.accessibilityIdentifier = ScreenIdentifier.TipInputView.fifteenPercentButton.rawValue
         button.tapPublisher.flatMap {
             Just(Tip.fifteenPercent)
         }.assign(to: \.value, on: tipSubject)
@@ -38,6 +40,7 @@ class TipInputView: UIView {
     
     private lazy var twentyPerButton: UIButton = {
         let button = ButtonFactory.build(tip: .twentyPercent)
+        button.accessibilityIdentifier = ScreenIdentifier.TipInputView.twentyPercentButton.rawValue
         button.tapPublisher.flatMap {
             Just(Tip.twentyPercent)
         }.assign(to: \.value, on: tipSubject)
@@ -47,6 +50,7 @@ class TipInputView: UIView {
     
     private lazy var customPerButton: UIButton = {
         let button: UIButton = UIButton()
+        button.accessibilityIdentifier = ScreenIdentifier.TipInputView.customTipButton.rawValue
         button.setTitle("Custom tip", for: .normal)
         button.titleLabel?.font = ThemeFont.bold(ofSite: 20)
         button.backgroundColor = ThemeColor.primary
@@ -82,10 +86,12 @@ class TipInputView: UIView {
         return stack
     }()
     
+    
     private let tipSubject = CurrentValueSubject<Tip, Never>(.none)
     var tipPublisher: AnyPublisher<Tip, Never> {
         return tipSubject.eraseToAnyPublisher()
     }
+    
     private var cancelables = Set<AnyCancellable>()
     
     init() {
@@ -153,6 +159,7 @@ class TipInputView: UIView {
             textField.placeholder = "Make it rain"
             textField.keyboardType = .decimalPad
             textField.autocorrectionType = .no
+            textField.accessibilityIdentifier = ScreenIdentifier.TipInputView.tipTextField.rawValue
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)

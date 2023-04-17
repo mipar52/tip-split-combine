@@ -19,6 +19,7 @@ class SplitInputView: UIView {
     
     private lazy var decButton: UIButton = {
         let button = buildDecButton(text: "-", corners: [.layerMinXMaxYCorner, .layerMinXMinYCorner])
+        button.accessibilityIdentifier = ScreenIdentifier.SplitInputView.decrementButton.rawValue
         button.tapPublisher.flatMap { [unowned self] _ in //transforms all elements into a new publisher
             Just(self.splitSubject.value == 1 ? 1 : splitSubject.value - 1)
         }.assign(to: \.value, on: splitSubject)
@@ -29,6 +30,7 @@ class SplitInputView: UIView {
     
     private lazy var incButton: UIButton = {
         let button = buildDecButton(text: "+", corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+        button.accessibilityIdentifier = ScreenIdentifier.SplitInputView.incrementButton.rawValue
         button.tapPublisher.flatMap { [unowned self] _ in //transforms all elements into a new publisher
             Just(self.splitSubject.value + 1)
         }.assign(to: \.value, on: splitSubject)
@@ -39,6 +41,7 @@ class SplitInputView: UIView {
     
     private lazy var quantityLabel: UILabel = {
         let label = LabelFactory.build(text: "1", font: ThemeFont.bold(ofSite: 20), backgroundColor: .white)
+        label.accessibilityIdentifier = ScreenIdentifier.SplitInputView.quantityValueLabel.rawValue
         return label
     }()
     
@@ -50,6 +53,7 @@ class SplitInputView: UIView {
     }()
     
     private let splitSubject: CurrentValueSubject<Int,Never> = .init(1)
+    
     var splitPublisher: AnyPublisher<Int, Never> {
         return splitSubject.eraseToAnyPublisher()
     }

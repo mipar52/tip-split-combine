@@ -57,8 +57,6 @@ class CalculatorViewController: UIViewController {
         super.viewDidLoad()
         setupLayout()
         bind()
-       // observe()
-        // Do any additional setup after loading the view.
     }
     
     private func bind() {
@@ -98,12 +96,6 @@ class CalculatorViewController: UIViewController {
             view.endEditing(true)
         }.store(in: &cancelable)
     }
-    
-//    private func observe() {
-//        viewTapPublisher.sink { [unowned self] _ in
-//            view.endEditing(true)
-//        }.store(in: &cancelable)
-//    }
     
     private func setupLayout() {
         view.backgroundColor = ThemeColor.background

@@ -19,19 +19,20 @@ class ResultView: UIView {
         let text = NSMutableAttributedString(string: "0€", attributes: [.font: ThemeFont.bold(ofSite: 40)])
         text.addAttributes([.font: ThemeFont.bold(ofSite: 20)], range: NSMakeRange(text.string.count - 1, 1))
         label.attributedText = text
+        label.accessibilityIdentifier = ScreenIdentifier.ResultView.totalAmountPerPersonValueLabel.rawValue
         label.textColor = .black
         return label
     }()
 
     
     private let totalBillLabel: AmountView = {
-        let view = AmountView(title: "Total bill", textAligment: .left)
+        let view = AmountView(title: "Total bill", textAligment: .left, amountLabelIdentifer: ScreenIdentifier.ResultView.totalBillValueLabel.rawValue)
         return view
     }()
     
     
     private let totalTipLabel: AmountView = {
-        let view = AmountView(title: "Total tip", textAligment: .right)
+        let view = AmountView(title: "Total tip", textAligment: .right, amountLabelIdentifer: ScreenIdentifier.ResultView.totalTipValueLabel.rawValue)
         return view
     }()
         
